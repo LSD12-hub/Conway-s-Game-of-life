@@ -18,8 +18,6 @@ public class ConwayPanel extends JPanel implements ActionListener{
 
     private Cell [][] grid;
 
-    private boolean isRunning = false;
-
     private Timer timer;
 
     public ConwayPanel() {
@@ -92,13 +90,11 @@ public class ConwayPanel extends JPanel implements ActionListener{
 
 
     public void stopGame(){
-        isRunning = false;
         timer.stop();
     }
 
 
     public void startGame(){
-        isRunning = true;
         timer = new Timer(DELAY, this);
         timer.start();
     }
