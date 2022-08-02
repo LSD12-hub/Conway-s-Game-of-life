@@ -12,7 +12,7 @@ import javax.swing.Timer;
 public class ConwayPanel extends JPanel implements ActionListener{
 
     static final int WIDTH = 500, HEIGHT = 500;
-    static final int ROWS = 5, COLS = 5;
+    static final int ROWS = 10, COLS = 10;
 
     private final int DELAY = 300;
 
@@ -32,17 +32,14 @@ public class ConwayPanel extends JPanel implements ActionListener{
         startGame();
         createGrid();
         
-        grid[2][2].setIsAlive(true);
-        grid[2][1].setIsAlive(true);
-        grid[2][3].setIsAlive(true);
-        // grid[3][2].setIsAlive(true);
-        // grid[1][2].setIsAlive(true);
+        grid[5][5].setIsAlive(true);
+        grid[6][6].setIsAlive(true);
+        grid[6][7].setIsAlive(true);
+        grid[7][6].setIsAlive(true);
+        grid[7][5].setIsAlive(true);
         
         addNeighbours();
 
-        for (Cell c : grid[2][2].getNeighbours()) {
-            System.out.println(c);
-        }
     }
 
 
@@ -140,16 +137,15 @@ public class ConwayPanel extends JPanel implements ActionListener{
         Cell newCell = new Cell(j, i);
 
         if (c.getNeighbours().size() < 2) {
-            newCell.setIsAlive(false);
             return newCell;
         }
 
         if (c.getNeighbours().size() == 2 || c.getNeighbours().size() == 3) {
+            newCell.setIsAlive(true);
             return newCell;
         }
 
         if (c.getNeighbours().size() > 3) {
-            newCell.setIsAlive(false);
             return newCell;
         }
         
