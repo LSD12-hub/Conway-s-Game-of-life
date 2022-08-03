@@ -17,6 +17,8 @@ public class ConwayPanel extends JPanel implements ActionListener{
 
     private final int DELAY = 100;
 
+    private boolean isRunning;
+
     private Cell [][] grid;
 
     private Timer timer;
@@ -25,10 +27,11 @@ public class ConwayPanel extends JPanel implements ActionListener{
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setBackground(Color.MAGENTA);
         this.setFocusable(true);
+        this.addKeyListener(new MyKeyAdaptor(this));
+
 
         grid = new Cell[ROWS][COLS];
 
-        startGame();
         createGrid();
         
         // grid[5][5].setIsAlive(true);
@@ -100,11 +103,13 @@ public class ConwayPanel extends JPanel implements ActionListener{
 
 
     public void stopGame(){
+        isRunning = false;
         timer.stop();
     }
 
 
     public void startGame(){
+        isRunning = true;
         timer = new Timer(DELAY, this);
         timer.start();
     }
@@ -160,5 +165,9 @@ public class ConwayPanel extends JPanel implements ActionListener{
         updateGrid();
 
         repaint();
+    }
+
+    public boolean getIsRunning() {
+        return isRunning;
     }
 }
