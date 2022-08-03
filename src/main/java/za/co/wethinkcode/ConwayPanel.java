@@ -22,6 +22,7 @@ public class ConwayPanel extends JPanel implements ActionListener{
     private Cell [][] grid;
 
     private Timer timer;
+    private Random rand;
 
     public ConwayPanel() {
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -29,30 +30,23 @@ public class ConwayPanel extends JPanel implements ActionListener{
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdaptor(this));
 
-
         grid = new Cell[ROWS][COLS];
+        rand = new Random();
 
         createGrid();
-        
-        // grid[5][5].setIsAlive(true);
-        // grid[6][6].setIsAlive(true);
-        // grid[6][7].setIsAlive(true);
-        // grid[7][6].setIsAlive(true);
-        // grid[7][5].setIsAlive(true);
-        
-        Random rand = new Random();
+        populateGrid();        
+        addNeighbours();
+    }
+
+    public void populateGrid() {
 
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                if (rand.nextInt(10) < 4)    
+                if (rand.nextInt(10) < 3)    
                 grid[i][j].setIsAlive(true);
             }
         }
-
-        addNeighbours();
-
     }
-
 
     private void addNeighbours() {
         for(int i = 0; i < COLS; i++){
@@ -168,6 +162,10 @@ public class ConwayPanel extends JPanel implements ActionListener{
     }
 
     public boolean getIsRunning() {
-        return isRunning;
+        return isRunning; 
+    }
+
+    public Cell[][] getGrid() {
+        return grid;
     }
 }
