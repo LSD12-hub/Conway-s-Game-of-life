@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -12,9 +13,9 @@ import javax.swing.Timer;
 public class ConwayPanel extends JPanel implements ActionListener{
 
     static final int WIDTH = 500, HEIGHT = 500;
-    static final int ROWS = 10, COLS = 10;
+    static final int ROWS = 25, COLS = 25;
 
-    private final int DELAY = 300;
+    private final int DELAY = 100;
 
     private Cell [][] grid;
 
@@ -30,12 +31,21 @@ public class ConwayPanel extends JPanel implements ActionListener{
         startGame();
         createGrid();
         
-        grid[5][5].setIsAlive(true);
-        grid[6][6].setIsAlive(true);
-        grid[6][7].setIsAlive(true);
-        grid[7][6].setIsAlive(true);
-        grid[7][5].setIsAlive(true);
+        // grid[5][5].setIsAlive(true);
+        // grid[6][6].setIsAlive(true);
+        // grid[6][7].setIsAlive(true);
+        // grid[7][6].setIsAlive(true);
+        // grid[7][5].setIsAlive(true);
         
+        Random rand = new Random();
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (rand.nextInt(10) < 4)    
+                grid[i][j].setIsAlive(true);
+            }
+        }
+
         addNeighbours();
 
     }
@@ -132,20 +142,16 @@ public class ConwayPanel extends JPanel implements ActionListener{
     private Cell liveCell(Cell c, int i, int j) {
         Cell newCell = new Cell(j, i);
 
-        if (c.getNeighbours().size() < 2) {
+        if (c.getNeighbours().size() < 2 || c.getNeighbours().size() > 3) {
             return newCell;
         }
 
         if (c.getNeighbours().size() == 2 || c.getNeighbours().size() == 3) {
             newCell.setIsAlive(true);
             return newCell;
-        }
-
-        if (c.getNeighbours().size() > 3) {
-            return newCell;
-        }
+        }   
         
-        return newCell;
+        return newCell; 
     }
 
 
