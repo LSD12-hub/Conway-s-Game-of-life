@@ -26,3 +26,5 @@ NB: This is a definition I found on google. Just type in celluar Automata.
 - `C` - to clear the screen
 - `R` - reset or populate the world
 - `Q` - to exit the program
+
+### Thank you for you time.
